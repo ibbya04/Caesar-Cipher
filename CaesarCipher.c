@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-int caesar_encrypt(FILE *plain, FILE *encrypted)
+int caesar_encrypt(FILE *plain, FILE *encrypted, int s)
 {
     if (plain == NULL || encrypted == NULL)
     {
@@ -14,7 +14,7 @@ int caesar_encrypt(FILE *plain, FILE *encrypted)
     {
         if (isalpha(c))
         {
-            char b = c + 1;
+            char b = c + s;
             putc(b, encrypted);
         }
         else
@@ -26,7 +26,7 @@ int caesar_encrypt(FILE *plain, FILE *encrypted)
     return 1;
 }
 
-int caesar_decrypt(FILE *encrypted, FILE *decrypted)
+int caesar_decrypt(FILE *encrypted, FILE *decrypted, int s)
 {
     if (decrypted == NULL || encrypted == NULL)
     {
@@ -39,7 +39,7 @@ int caesar_decrypt(FILE *encrypted, FILE *decrypted)
     {
         if (isalpha(c))
         {
-            char b = c - 1;
+            char b = c - s;
             putc(b, decrypted);
         }
         else
@@ -70,12 +70,24 @@ int main()
 
     else
     {
-        if (choice == 1)
-            caesar_encrypt(plain, encrypted);
-
-        else
-            caesar_decrypt(encrypted, decrypted);
-
+        if (choice == 1){
+            int shift;
+            while (shift < 1 || shift > 25)
+            {
+                printf("Choose the amount of character shift\n");
+                scanf("%d", &shift);
+            }
+            caesar_encrypt(plain, encrypted, shift);
+        }
+        else{
+            int shift;
+            while (shift < 1 || shift > 25)
+            {
+                printf("Choose the amount of character shift\n");
+                scanf("%d", &shift);
+            }
+            caesar_decrypt(encrypted, decrypted, shift);
+        }
         fclose(plain);
         fclose(encrypted);
     }
