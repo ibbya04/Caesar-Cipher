@@ -65,8 +65,8 @@ int main()
     FILE *encrypted = fopen("encrypted.txt", "r+");
     FILE *decrypted = fopen("decrypted.txt", "r+");
 
-    if (plain = NULL)
-        printf("Could not open file\n");
+    if (plain == NULL || encrypted == NULL || decrypted == NULL)
+        printf("Could not open file/s\n");
 
     else
     {
